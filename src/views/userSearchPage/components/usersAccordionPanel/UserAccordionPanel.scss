@@ -1,0 +1,38 @@
+.user-accordion-panel {
+  display: flex;
+  flex-wrap: wrap;
+
+  .repo-card {
+    width: 100%;
+    margin: 5px;
+
+    .repo-card-title {
+      display: flex;
+      justify-content: space-between;
+
+      span:first-of-type {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+    }
+  }
+}
+
+@media (min-width: 800px) {
+  .user-accordion-panel {
+    .repo-card {
+      width: calc(50% - 10px);
+      margin: 5px;
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+  .user-accordion-panel {
+    .repo-card {
+      width: calc(33% - 10px);
+      margin: 5px;
+    }
+  }
+}

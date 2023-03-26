@@ -10,7 +10,7 @@ type UserSearch = (
   options: UserSearchOptions
 ) => UseQueryResult<User[], unknown>;
 
-export const createUsearSearchUrl = ({
+export const createUserSearchUrl = ({
   userName = '',
   perPage = 5,
 }: UserSearchOptions) =>
@@ -20,7 +20,7 @@ export const createUsearSearchUrl = ({
   );
 
 export const useUserSearch: UserSearch = (options) => {
-  const url = useMemo(() => createUsearSearchUrl(options), [options]);
+  const url = useMemo(() => createUserSearchUrl(options), [options]);
   return useQuery({
     queryKey: ['users', options.userName],
     queryFn: () =>

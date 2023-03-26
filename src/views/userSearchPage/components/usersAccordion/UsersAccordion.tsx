@@ -4,12 +4,17 @@ import { Spin, Collapse, Empty } from 'antd';
 import { useUserSearch } from 'hooks';
 
 import './UsersAccordion.scss';
-import { UsersAccordionHeader } from '../usersAccortionHeader';
+import { UsersAccordionPanel } from '../usersAccordionPanel';
+import { UsersAccordionHeader } from '../usersAccordionHeader';
 
 const { Panel } = Collapse;
 
 export const UsersAccordion: FC<{ userName: string }> = ({ userName }) => {
   const { data, isLoading } = useUserSearch({ userName });
+
+  if (isLoading) {
+    return <Spin className="users-accordion-spin" size="large" />;
+  }
 
   if (!isLoading && data?.length === 0) {
     return <Empty description="Nothing is here, try another user name" />;
@@ -17,8 +22,8 @@ export const UsersAccordion: FC<{ userName: string }> = ({ userName }) => {
 
   return (
     <div className="users-accordion">
-      {isLoading && <Spin className="users-accordion-spin" size="large" />}
       <Collapse
+        key={userName}
         bordered={false}
         defaultActiveKey={['0']}
         expandIconPosition="end"
@@ -28,7 +33,7 @@ export const UsersAccordion: FC<{ userName: string }> = ({ userName }) => {
             key={index}
             header={<UsersAccordionHeader userInfo={userInfo} />}
           >
-            <p>elo</p>
+            <UsersAccordionPanel userInfo={userInfo} />
           </Panel>
         ))}
       </Collapse>

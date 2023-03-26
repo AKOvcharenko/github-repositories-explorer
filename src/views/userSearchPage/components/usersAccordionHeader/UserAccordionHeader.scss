@@ -1,0 +1,28 @@
+.user-accordion-header {
+  display: flex;
+  align-items: center;
+
+  h2 {
+    margin: 0;
+  }
+
+  .user-accordion-avatar {
+    width: 64px;
+    height: 64px;
+    margin-right: 20px;
+
+    img {
+      object-fit: fill;
+      width: 100%;
+    }
+  }
+}
+
+@media (min-width: 800px) {
+  .user-accordion-header {
+    .user-accordion-avatar {
+      width: 48px;
+      height: 48px;
+    }
+  }
+}

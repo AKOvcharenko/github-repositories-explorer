@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Route, Routes, Navigate, BrowserRouter } from 'react-router-dom';
 
+import { AppRouting } from 'consts';
 import { NotFoundPage, UserSearchPage } from 'views';
 
 import './App.scss';
@@ -20,11 +21,19 @@ export const App: FC = () => {
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
           <Routes>
-            <Route path="/users/:userName" element={<UserSearchPage />} />
-            <Route path="/users" element={<UserSearchPage />} />
             <Route
-              path="/"
-              element={<Navigate to="/users/" replace={true} />}
+              path={AppRouting.USER_SEARCH_RESULT_PAGE}
+              element={<UserSearchPage />}
+            />
+            <Route
+              path={AppRouting.USER_SEARCH_PAGE}
+              element={<UserSearchPage />}
+            />
+            <Route
+              path={AppRouting.ROOT}
+              element={
+                <Navigate to={AppRouting.USER_SEARCH_PAGE} replace={true} />
+              }
             />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
