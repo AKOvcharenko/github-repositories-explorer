@@ -6,7 +6,13 @@ import { NotFoundPage, UserSearchPage } from 'views';
 
 import './App.scss';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 export const App: FC = () => {
   return (
@@ -14,7 +20,7 @@ export const App: FC = () => {
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
           <Routes>
-            <Route path="/users/:userId" element={<UserSearchPage />} />
+            <Route path="/users/:userName" element={<UserSearchPage />} />
             <Route path="/users" element={<UserSearchPage />} />
             <Route
               path="/"

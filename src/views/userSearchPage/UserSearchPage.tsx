@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-import classNames from 'classnames';
 
 import './UserSearchPage.scss';
 import { UserSearchForm, UserSearchResult } from './components';

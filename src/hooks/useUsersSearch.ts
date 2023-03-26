@@ -22,8 +22,8 @@ export const createUsearSearchUrl = ({
 export const useUserSearch: UserSearch = (options) => {
   const url = useMemo(() => createUsearSearchUrl(options), [options]);
   return useQuery({
-    queryKey: ['users'],
-    queryFn: (): Promise<User[]> =>
+    queryKey: ['users', options.userName],
+    queryFn: () =>
       axios.get(url).then(({ data }: { data: { items: User[] } }) => {
         return data.items;
       }),

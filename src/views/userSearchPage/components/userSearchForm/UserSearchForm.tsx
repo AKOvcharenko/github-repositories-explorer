@@ -1,20 +1,25 @@
 import { Button, Form, Input } from 'antd';
 import React, { FC, useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { UserOutlined } from '@ant-design/icons';
+import { useNavigate, useParams } from 'react-router-dom';
 
 export const UserSearchForm: FC = () => {
   const navigate = useNavigate();
+  const { userName } = useParams();
+
   const onSubmit = useMemo(
-    () =>
-      ({ username = '' }: { username: string }) =>
-        navigate(`/users/${username}`),
+    () => (values: { userName: string }) =>
+      navigate(`/users/${values.userName}`),
     []
   );
 
   return (
-    <Form name="username-search" onFinish={onSubmit}>
-      <Form.Item name="username">
+    <Form
+      name="username-search"
+      onFinish={onSubmit}
+      initialValues={{ userName }}
+    >
+      <Form.Item name="userName">
         <Input
           prefix={<UserOutlined className="site-form-item-icon" />}
           placeholder="Username"
