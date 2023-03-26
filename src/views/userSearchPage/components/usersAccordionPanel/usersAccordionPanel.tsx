@@ -3,11 +3,11 @@ import { StarFilled } from '@ant-design/icons';
 import { Skeleton, Card, Empty, Space } from 'antd';
 
 import { useReposSearch } from 'hooks';
-import { User, Repositorium } from 'models';
+import { User, Repository } from 'models';
 
 import './UserAccordionPanel.scss';
 
-const CardTitle: FC<{ repoInfo: Repositorium }> = ({ repoInfo }) => (
+const CardTitle: FC<{ repoInfo: Repository }> = ({ repoInfo }) => (
   <div className="repo-card-title">
     <span>{repoInfo.name}</span>
     <span>
@@ -19,7 +19,7 @@ const CardTitle: FC<{ repoInfo: Repositorium }> = ({ repoInfo }) => (
   </div>
 );
 
-const RepoCard: FC<{ repoInfo: Repositorium }> = ({ repoInfo }) => (
+const RepoCard: FC<{ repoInfo: Repository }> = ({ repoInfo }) => (
   <Card
     bordered={false}
     className="repo-card"

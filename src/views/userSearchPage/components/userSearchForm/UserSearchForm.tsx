@@ -10,7 +10,7 @@ export const UserSearchForm: FC = () => {
   const onSubmit = useMemo(
     () => (values: { userName: string }) =>
       navigate(`/users/${values.userName}`),
-    []
+    [navigate]
   );
 
   return (
