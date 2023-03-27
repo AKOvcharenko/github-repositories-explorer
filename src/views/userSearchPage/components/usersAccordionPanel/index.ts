@@ -1,1 +1,1 @@
-export { UsersAccordionPanel } from './usersAccordionPanel';
+export { UsersAccordionPanel } from './UsersAccordionPanel';
