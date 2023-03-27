@@ -1,7 +1,13 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
-import { act, render, screen, waitFor } from '@testing-library/react';
+import {
+  act,
+  render,
+  screen,
+  waitFor,
+  fireEvent,
+} from '@testing-library/react';
 
 import { AppRouting } from 'consts';
 import { UserSearchForm } from './UserSearchForm';
@@ -36,8 +42,8 @@ describe('User Search Form Component', () => {
     expect(button).toBeInTheDocument();
     expect(button?.textContent).toEqual('Search');
 
-    if (input) userEvent.clear(input);
     act(() => {
+      if (input) fireEvent.change(input, { target: { value: '' } });
       if (button) userEvent.click(button);
     });
 

@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useMemo } from 'react';
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
 
-import { API } from 'consts';
+import { USER_SEARCH_URL } from 'consts';
 import { User } from 'models';
 
 type UserSearchOptions = { userName?: string; perPage?: number };
@@ -14,7 +14,7 @@ export const createUserSearchUrl = ({
   userName = '',
   perPage = 5,
 }: UserSearchOptions) =>
-  API.USER_SEARCH_TEMPLATE.replace(/USER_NAME/, userName).replace(
+  USER_SEARCH_URL.replace(/USER_NAME/, userName).replace(
     /PER_PAGE/,
     perPage.toString()
   );

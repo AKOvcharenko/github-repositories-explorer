@@ -9,12 +9,13 @@ export const UserSearchForm: FC = () => {
 
   const onSubmit = useMemo(
     () => (values: { userName: string }) =>
-      navigate(`/users/${values.userName}`),
+      navigate(`/users/${values.userName || ''}`),
     [navigate]
   );
 
   return (
     <Form
+      key={userName}
       name="username-search"
       onFinish={onSubmit}
       initialValues={{ userName }}

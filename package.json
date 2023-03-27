@@ -17,7 +17,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!axios)/\"",
     "eject": "react-scripts eject",
     "lint": "npx eslint ./src",
     "lint:fix": "npx eslint --fix ./src",
@@ -51,6 +51,7 @@
     "@types/react-dom": "^18.0.11",
     "husky": "^8.0.3",
     "lint-staged": "^13.2.0",
+    "msw": "^1.2.1",
     "prettier": "^2.8.7",
     "react-scripts": "^5.0.1",
     "sass": "^1.60.0",
