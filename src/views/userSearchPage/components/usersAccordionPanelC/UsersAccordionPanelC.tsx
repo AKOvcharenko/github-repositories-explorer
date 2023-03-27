@@ -5,7 +5,7 @@ import { Skeleton, Card, Empty, Space } from 'antd';
 import { useReposSearch } from 'hooks';
 import { User, Repository } from 'models';
 
-import './UserAccordionPanel.scss';
+import './UsersAccordionPanelC.scss';
 
 const CardTitle: FC<{ repoInfo: Repository }> = ({ repoInfo }) => (
   <div className="repo-card-title">

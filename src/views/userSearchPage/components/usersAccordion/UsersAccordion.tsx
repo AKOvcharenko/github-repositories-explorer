@@ -4,7 +4,7 @@ import { Spin, Collapse, Empty } from 'antd';
 import { useUserSearch } from 'hooks';
 
 import './UsersAccordion.scss';
-import { UsersAccordionPanel } from '../usersAccordionPanel';
+import { UsersAccordionPanel } from '../usersAccordionPanelC';
 import { UsersAccordionHeader } from '../usersAccordionHeader';
 
 const { Panel } = Collapse;

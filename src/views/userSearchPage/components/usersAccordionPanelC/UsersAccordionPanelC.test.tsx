@@ -5,7 +5,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { User } from 'models';
 import { USERS, REPOS } from 'mocks';
 
-import { UsersAccordionPanel } from './usersaccordionpanel';
+import { UsersAccordionPanel } from './UsersAccordionPanelC';
 
 const queryClient = new QueryClient();
 const customRender = (userName: User) =>
