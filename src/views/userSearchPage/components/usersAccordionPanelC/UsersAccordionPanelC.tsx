@@ -30,7 +30,13 @@ const RepoCard: FC<{ repoInfo: Repository }> = ({ repoInfo }) => (
 );
 
 export const UsersAccordionPanel: FC<{ userInfo: User }> = ({ userInfo }) => {
-  const { data } = useReposSearch({ url: userInfo.repos_url });
+  // For now i purposely use "data" from react-query but not from redux store
+  // because it just used for direct view rendering
+  // in case if data needs to be somehow modified it should be taken from redux store
+  const { data } = useReposSearch({
+    url: userInfo.repos_url,
+    userName: userInfo.login,
+  });
 
   if (!data) return <Skeleton active />;
   if (!data.length) return <Empty description="User has no repositories" />;

@@ -1,9 +1,15 @@
 import axios from 'axios';
-import { useMemo } from 'react';
+import { useMemo, useEffect } from 'react';
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
 
-import { USER_SEARCH_URL } from 'consts';
+import {
+  storeUsersAction,
+  storeUsersRequestStateAction,
+} from 'store/usersSlice';
 import { User } from 'models';
+import { useAppDispatch } from 'store';
+import { USER_SEARCH_URL } from 'consts';
+import { openNotification } from 'common';
 
 type UserSearchOptions = { userName?: string; perPage?: number };
 type UserSearch = (
@@ -19,13 +25,40 @@ export const createUserSearchUrl = ({
     perPage.toString()
   );
 
+const errorNotification = () =>
+  openNotification({
+    type: 'error',
+    message: 'Ups!',
+    description: 'Users request failed',
+  });
+
 export const useUserSearch: UserSearch = (options) => {
+  const dispatch = useAppDispatch();
+
   const url = useMemo(() => createUserSearchUrl(options), [options]);
-  return useQuery({
+  const query = useQuery({
     queryKey: ['users', options.userName],
     queryFn: () =>
       axios.get(url).then(({ data }: { data: { items: User[] } }) => {
         return data.items;
       }),
   });
+
+  useEffect(() => {
+    if (query.data) {
+      dispatch(storeUsersAction(query.data));
+    }
+  }, [query.data, dispatch]);
+
+  useEffect(() => {
+    dispatch(storeUsersRequestStateAction(query.isFetching));
+  }, [query.isFetching, dispatch]);
+
+  useEffect(() => {
+    if (query.isError) {
+      errorNotification();
+    }
+  }, [query.isError, dispatch]);
+
+  return query;
 };

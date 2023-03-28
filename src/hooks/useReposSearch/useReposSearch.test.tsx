@@ -14,7 +14,11 @@ const wrapper: FC<{ children: ReactElement }> = ({ children }) => (
 describe('useReposSearch Hook', () => {
   it('Should fetch data', async () => {
     const { result } = renderHook(
-      () => useReposSearch({ url: USERS[0].repos_url }),
+      () =>
+        useReposSearch({
+          url: USERS[0].repos_url,
+          userName: USERS[0].login,
+        }),
       {
         wrapper,
       }
