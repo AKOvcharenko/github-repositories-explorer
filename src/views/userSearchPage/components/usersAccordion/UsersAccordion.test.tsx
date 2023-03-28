@@ -1,16 +1,21 @@
 import React from 'react';
+import { Provider } from 'react-redux';
 import { render, waitFor, screen } from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
+import { store } from 'store';
 import { USERS, EMPTY_REPOS_USER_NAME, NON_EMPTY_REPOS_USER_NAME } from 'mocks';
+
 import { UsersAccordion } from './UsersAccordion';
 
 const queryClient = new QueryClient();
 const customRender = (userName: string) =>
   render(
-    <QueryClientProvider client={queryClient}>
-      <UsersAccordion userName={userName} />
-    </QueryClientProvider>
+    <Provider store={store}>
+      <QueryClientProvider client={queryClient}>
+        <UsersAccordion userName={userName} />
+      </QueryClientProvider>
+    </Provider>
   );
 
 describe('User Accordion Component', () => {

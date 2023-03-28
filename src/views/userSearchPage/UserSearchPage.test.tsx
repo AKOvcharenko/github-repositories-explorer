@@ -5,9 +5,12 @@ import {
   waitFor,
   fireEvent,
 } from '@testing-library/react';
+import { Provider } from 'react-redux';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+import { store } from 'store';
 
 import { AppRouting } from 'consts';
 import { EMPTY_REPOS_USER_NAME, NON_EMPTY_REPOS_USER_NAME, USERS } from 'mocks';
@@ -17,25 +20,27 @@ import { UserSearchPage } from './UserSearchPage';
 const queryClient = new QueryClient();
 const customRender = () =>
   render(
-    <QueryClientProvider client={queryClient}>
-      <MemoryRouter initialEntries={['/users']}>
-        <Routes>
-          <Route
-            path={AppRouting.USER_SEARCH_RESULT_PAGE}
-            element={<UserSearchPage />}
-          />
-          <Route
-            path={AppRouting.USER_SEARCH_PAGE}
-            element={<UserSearchPage />}
-          />
-        </Routes>
-      </MemoryRouter>
-    </QueryClientProvider>
+    <Provider store={store}>
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter initialEntries={['/users']}>
+          <Routes>
+            <Route
+              path={AppRouting.USER_SEARCH_RESULT_PAGE}
+              element={<UserSearchPage />}
+            />
+            <Route
+              path={AppRouting.USER_SEARCH_PAGE}
+              element={<UserSearchPage />}
+            />
+          </Routes>
+        </MemoryRouter>
+      </QueryClientProvider>
+    </Provider>
   );
 
 describe('UserSearchPage', () => {
   it('UserSearchPage workflow', async () => {
-    const { container, debug } = customRender();
+    const { container } = customRender();
     // User comes to page with empty form
     const searchResult = container.querySelector('.user-search-result_wrapper');
     const button = container.querySelector('button[type="submit"]');

@@ -1,7 +1,9 @@
 import React from 'react';
+import { Provider } from 'react-redux';
 import { render, waitFor, screen } from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
+import { store } from 'store';
 import { User } from 'models';
 import { USERS, REPOS } from 'mocks';
 
@@ -10,9 +12,11 @@ import { UsersAccordionPanel } from './UsersAccordionPanelC';
 const queryClient = new QueryClient();
 const customRender = (userName: User) =>
   render(
-    <QueryClientProvider client={queryClient}>
-      <UsersAccordionPanel userInfo={userName} />
-    </QueryClientProvider>
+    <Provider store={store}>
+      <QueryClientProvider client={queryClient}>
+        <UsersAccordionPanel userInfo={userName} />
+      </QueryClientProvider>
+    </Provider>
   );
 
 describe('Users Accordion Panel Component', () => {
@@ -44,6 +48,9 @@ describe('Users Accordion Panel Component', () => {
       expect(container.querySelector('.ant-empty')).toBeInTheDocument();
       expect(screen.getByText('User has no repositories')).toBeInTheDocument();
       expect(skeleton).not.toBeInTheDocument();
+      expect(
+        container.querySelector('.user-accordion-panel')
+      ).not.toBeInTheDocument();
     });
   });
 });

@@ -1,14 +1,18 @@
+import { Provider } from 'react-redux';
 import React, { FC, ReactElement } from 'react';
 import { waitFor, renderHook } from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
+import { store } from 'store';
 import { USERS, REPOS } from 'mocks';
 
 import { useReposSearch } from './useReposSearch';
 
 const queryClient = new QueryClient();
 const wrapper: FC<{ children: ReactElement }> = ({ children }) => (
-  <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+  <Provider store={store}>
+    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+  </Provider>
 );
 
 describe('useReposSearch Hook', () => {

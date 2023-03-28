@@ -27,7 +27,7 @@ describe('Not Found Page', () => {
   });
 
   it('Back button should lead to root', async () => {
-    const { container, debug } = customRender();
+    const { container } = customRender();
     const link = container.querySelector('a');
     act(() => {
       if (link) userEvent.click(link);

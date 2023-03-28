@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { UsersState } from './model';
 import { storeUsers, storeUsersRequestState } from './reducers';
 
-const initialState: UsersState = {
+export const initialState: UsersState = {
   users: [],
   loading: false,
 };

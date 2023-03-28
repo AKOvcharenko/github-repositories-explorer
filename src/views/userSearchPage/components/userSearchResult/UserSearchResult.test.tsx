@@ -1,8 +1,10 @@
 import React from 'react';
+import { Provider } from 'react-redux';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { render, waitFor, screen } from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
+import { store } from 'store';
 import { AppRouting } from 'consts';
 import { NON_EMPTY_REPOS_USER_NAME, USERS } from 'mocks';
 
@@ -11,20 +13,22 @@ import { UserSearchResult } from './UserSearchResult';
 const queryClient = new QueryClient();
 const customRender = (appUrl: string) =>
   render(
-    <QueryClientProvider client={queryClient}>
-      <MemoryRouter initialEntries={[appUrl]}>
-        <Routes>
-          <Route
-            path={AppRouting.USER_SEARCH_RESULT_PAGE}
-            element={<UserSearchResult />}
-          />
-          <Route
-            path={AppRouting.USER_SEARCH_PAGE}
-            element={<UserSearchResult />}
-          />
-        </Routes>
-      </MemoryRouter>
-    </QueryClientProvider>
+    <Provider store={store}>
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter initialEntries={[appUrl]}>
+          <Routes>
+            <Route
+              path={AppRouting.USER_SEARCH_RESULT_PAGE}
+              element={<UserSearchResult />}
+            />
+            <Route
+              path={AppRouting.USER_SEARCH_PAGE}
+              element={<UserSearchResult />}
+            />
+          </Routes>
+        </MemoryRouter>
+      </QueryClientProvider>
+    </Provider>
   );
 
 describe('User Search Result Component', () => {

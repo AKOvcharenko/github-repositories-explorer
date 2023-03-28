@@ -15,30 +15,31 @@ export const UsersAccordion: FC<{ userName: string }> = ({ userName }) => {
   // in case if data needs to be somehow modified it should be taken from redux store
   const { data, isFetching } = useUserSearch({ userName });
 
+  if (isFetching) {
+    return <Spin className="users-accordion-spin" size="large" />;
+  }
+
   if (!isFetching && data?.length === 0) {
     return <Empty description="Nothing is here, try another user name" />;
   }
 
   return (
-    <>
-      {isFetching && <Spin className="users-accordion-spin" size="large" />}
-      <div className="users-accordion">
-        <Collapse
-          key={userName}
-          bordered={false}
-          defaultActiveKey={['0']}
-          expandIconPosition="end"
-        >
-          {data?.map((userInfo, index) => (
-            <Panel
-              key={index}
-              header={<UsersAccordionHeader userInfo={userInfo} />}
-            >
-              <UsersAccordionPanel userInfo={userInfo} />
-            </Panel>
-          ))}
-        </Collapse>
-      </div>
-    </>
+    <div className="users-accordion">
+      <Collapse
+        key={userName}
+        bordered={false}
+        defaultActiveKey={['0']}
+        expandIconPosition="end"
+      >
+        {data?.map((userInfo, index) => (
+          <Panel
+            key={index}
+            header={<UsersAccordionHeader userInfo={userInfo} />}
+          >
+            <UsersAccordionPanel userInfo={userInfo} />
+          </Panel>
+        ))}
+      </Collapse>
+    </div>
   );
 };
