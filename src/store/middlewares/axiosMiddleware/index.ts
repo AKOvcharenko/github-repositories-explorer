@@ -1,1 +1,0 @@
-export { setCustomAxiosHeaderCreator } from './axiosMiddleware';

@@ -8,7 +8,7 @@ import { useDispatch, useSelector, TypedUseSelectorHook } from 'react-redux';
 
 import { reposSlice } from './reposSlice';
 import { usersSlice } from './usersSlice';
-import { setCustomAxiosHeaderCreator } from './middlewares';
+import { customMiddlewareDependsOnEnvVarCreator } from './middlewares';
 
 const rootReducer = combineReducers({
   usersSlice,
@@ -19,7 +19,7 @@ export const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) => [
     ...getDefaultMiddleware(),
-    setCustomAxiosHeaderCreator(process.env.REACT_APP_AUTH_HEADER),
+    customMiddlewareDependsOnEnvVarCreator(process.env.REACT_APP_AUTH_HEADER),
   ],
 });
 
