@@ -29,8 +29,25 @@ describe('useReposSearch Hook', () => {
     );
 
     await waitFor(() => {
+      expect(result.current.isFetching).toBe(true);
+      expect(store.getState().reposSlice.repos[USERS[0].login].loading).toBe(
+        true
+      );
+    });
+
+    await waitFor(() => {
+      expect(result.current.isFetching).toBe(false);
+      expect(
+        store.getState().reposSlice.repos[USERS[0].login].loading
+      ).toStrictEqual(false);
+    });
+
+    await waitFor(() => {
       expect(result.current.isSuccess).toBe(true);
       expect(result.current.data).toStrictEqual(REPOS);
+      expect(
+        store.getState().reposSlice.repos[USERS[0].login].repositories
+      ).toStrictEqual(REPOS);
     });
   });
 });

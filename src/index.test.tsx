@@ -11,9 +11,7 @@ describe('index', () => {
     });
 
     await waitFor(() => {
-      expect(
-        document.querySelector('#root .app-container')
-      ).toBeInTheDocument();
+      expect(document.querySelector('.app-container')).toBeInTheDocument();
     });
   });
 });
