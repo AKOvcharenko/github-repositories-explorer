@@ -33,6 +33,6 @@ describe('customMiddlewareDependsOnEnvVarCreator', () => {
     customMiddlewareDependsOnEnvVarCreator(MOCK_ENV_VALUE)(MOCK_API)(
       MOCK_NEXT as Dispatch<AnyAction>
     )(MOCK_ACTION);
-    expect(identity).toBeCalledWith;
+    expect(identity).toBeCalledWith(MOCK_ENV_VALUE);
   });
 });

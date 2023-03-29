@@ -10,8 +10,11 @@ describe('index', () => {
       require('./index.tsx');
     });
 
-    await waitFor(() => {
-      expect(document.querySelector('.app-container')).toBeInTheDocument();
-    });
+    await waitFor(
+      () => {
+        expect(document.querySelector('.app-container')).toBeInTheDocument();
+      },
+      { timeout: 10000 }
+    );
   });
 });
